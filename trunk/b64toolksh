@@ -1,0 +1,21 @@
+#!/bin/ksh
+
+
+pwd
+
+if [[ $# -eq 0 ]]; then
+
+java -jar Base64SimpleEncoder.jar
+
+else 
+
+java -cp Base64SimpleEncoder.jar pl.interia.w.kowalczyk.jacek.Base64SimpleEncoder $1 $2 $3 $4 $5 $6 $7 $8 $9
+
+java -cp Base64SimpleEncoder.jar pl.interia.w.kowalczyk.jacek.Base64SimpleEncoder "$*"
+
+fi
+
+pwd
+
+
+
