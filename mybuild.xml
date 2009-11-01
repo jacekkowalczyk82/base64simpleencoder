@@ -1,0 +1,98 @@
+<project name="adhocsimulator" basedir=".">
+    
+    <!--
+    Version 08 June 2007, 
+    -->
+    <property environment="env"/>
+    <property name="projectName" value="Base64SimpleEncoder" />
+    
+    
+    
+    
+    <property name="mainClassName" value="pl.interia.w.kowalczyk.jacek.Base64SimpleEncoderTool" />
+    <property name="jarName" value="${projectName}.jar" />
+    <property name="build" value="./build/" />
+    <property name="build.classes" value="./build/classes" />
+    <property name="build.test.classes" value="./build/test/classes" /> 
+    
+    <property name="test" value="./test/${projectName}" />
+    <property name="logs" value="./logs" />
+    
+    <property name="jarDir" value="./dist" />
+    
+    <property name="src" value="./src" />
+    
+    
+    <path id="path">
+        <pathelement path="./build/classes;C:\ant\lib; "/>
+        
+        <fileset dir="C:\ant\lib">
+            <include name="*.jar"/>
+        </fileset>
+        
+        <fileset dir=".">
+            <include name="lib/*.jar"/>
+            <include name="*.jar"/>
+        </fileset>
+        
+    </path>
+    
+    
+    <target name="recordLog">
+        <mkdir dir="${logs}"/>
+        <record name="${logs}/build.log" append="no" loglevel="verbose" action="start"/>
+        <echo message="Ant build file: ${ant.file}"/> 
+    </target>
+    <target name="logo" depends="recordLog"><!--http://jakarta.apache.org/images/jakarta-logo.gif -->
+        <!--splash imageurl="images/ant_logo_large.gif"
+                useproxy="true"
+                showduration="2000"/-->
+        <splash imageurl="ftp://ptc23/images/ant.jpg"
+                useproxy="true"
+                showduration="2000"/>
+    </target>
+    
+    
+    
+    <target name="prepare" depends="recordLog, logo">
+        
+        <mkdir dir="./${build}" />
+        <mkdir dir="./${build.classes}" />
+        <mkdir dir="./${build.test.classes}" />
+        
+        <mkdir dir="./${jarDir}" />
+        
+    </target>
+    
+    <target name="copy" depends="prepare">
+        
+        <echo level="info" message="do nothing"/>
+        
+    </target>
+    
+    
+    <target name="compile" depends="prepare" >
+        <javac srcdir="./${src}" destdir="./${build.classes}" source="1.5">
+            <classpath refid="path"/>
+            <classpath>
+                
+                <pathelement location="./${build.classes}" />
+                
+            </classpath>
+        </javac>
+    </target>
+    
+    <target name="jar" depends="compile" >
+        <jar destfile="${jarDir}/AntMade_${jarName}" basedir="${build.classes}" compress="true">
+            <manifest>
+                <attribute name="Built-By" value="Jacek Kowalczyk"/>
+                <attribute name="Main-Class" value="${mainClassName}"/>
+            <!--attribute name="Class-Path" 
+                           value="lib/bcmail-jdk15-137.jar lib/bcprov-jdk15-137.jar lib/itext-2.0.4.jar lib/jdom.jar lib/log4j-1.2.14.jar"/-->
+            </manifest>
+        </jar>
+        
+        <copy  file="${jarDir}/AntMade_${jarName}" tofile="${jarName}"/>
+        
+    </target>
+</project>
