@@ -24,9 +24,9 @@
     
     
     <path id="path">
-        <pathelement path="./build/classes;C:\ant\lib; "/>
+        <pathelement path="./build/classes;c:\programy\apache-ant-1.9.6\lib; "/>
         
-        <fileset dir="C:\ant\lib">
+        <fileset dir="c:\programy\apache-ant-1.9.6\lib">
             <include name="*.jar"/>
         </fileset>
         
